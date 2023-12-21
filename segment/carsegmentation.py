@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 from ultralytics import YOLO
+import easygui
 
 def show_mask(mask, ax, random_color=False):
     if random_color:
