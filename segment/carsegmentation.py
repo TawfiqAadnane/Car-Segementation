@@ -2,6 +2,9 @@ import numpy as np
 import cv2
 from ultralytics import YOLO
 import easygui
+import sys
+from segment_anything import sam_model_registry, SamPredictor
+
 
 def show_mask(mask, ax, random_color=False):
     if random_color:
@@ -17,10 +20,11 @@ def show_points(coords, labels, ax, marker_size=375):
     neg_points = coords[labels==0]
     ax.scatter(pos_points[:, 0], pos_points[:, 1], color='green', marker='*', s=marker_size, edgecolor='white', linewidth=1.25)
     ax.scatter(neg_points[:, 0], neg_points[:, 1], color='red', marker='*', s=marker_size, edgecolor='white', linewidth=1.25)   
-    
+
+
 model = YOLO('yolov8n.pt')
 
-image = cv2.imread('/kaggle/input/stanford-cars-dataset/cars_train/cars_train/00029.jpg')
+image = easygui.fileopenbox(title='Select input file', filetypes=['*.jpg', '*.png'])
 
 objects = model(image, save=True,classes=[2])
 
@@ -40,21 +44,6 @@ def SegmentCar(objects):
         if len(classe) > 0 and classe[0]==2 :
             xyxy = boxes.xyxy
             x1,y1,x2,y2 = xyxy[0]
-            
-    #         cv2.rectangle(image, (int(x1),int(y1),int(x2),int(y2)),(0,255,0),2)
-            
-    #         text = classe_name
-    #         font = cv2.FONT_HERSHEY_SIMPLEX
-    #         font_scale=1.5
-    #         thickness = 4
-    #         text_size, _ = cv2.getTextSize(text,font,font_scale, thickness)
-    #         text_x = int(x1+5)
-    #         text_y = int(y1+text_size[1]+5)
-    #         cv2.putText(image,text,(text_x,text_y),font, font_scale, (0,0,255),thickness)
-            
-            import sys
-    #         sys.path("..")
-            from segment_anything import sam_model_registry, SamPredictor
 
             sam_checkpoint = "/kaggle/input/segment-anything-models/sam_vit_h_4b8939.pth"
             model_type = "vit_h"

@@ -14,7 +14,7 @@ setup(
     author_email="<tawfiqaadnane@gmail.com>",
     description=DESCRIPTION,
     packages=find_packages(),
-    install_requires=['opencv-python', 'numpy', 'ultralytics', 'easygui'],
+    install_requires=['sys','opencv-python', 'numpy','segment_anything', 'ultralytics', 'easygui'],
     keywords=['python', 'image', 'car', 'segement'],
     classifiers=[
         "Development Status :: 1 - Planning",
