@@ -65,14 +65,6 @@ def SegmentCar(objects):
                 box=input_box[None,:],
                 multimask_output=False,
             )
-            
-            # plt.figure(figsize=(5,5))
-            # plt.imshow(image)
-            # show_mask(masks[0],plt.gca())
-            # #show_box(input_box,plt.gca())
-            # plt.axis('off')
-            # plt.show()
-
     mask = masks[0]
     
     negative_img0 = np.tile(mask[:,:,np.newaxis],(1,1,3)).astype(int)
