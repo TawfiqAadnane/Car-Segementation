@@ -1,0 +1,6 @@
+sys
+opencv-python
+numpy
+segment_anything
+ultralytics
+easygui
